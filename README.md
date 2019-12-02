@@ -4,7 +4,7 @@ A SPM tool to sort `enum` and `switch` cases
 
 ## Example
 
-input
+Input
 ```
  switch aComplexCase {
    case .sa, let .da(_):
@@ -14,7 +14,7 @@ input
  }
 ``` 
 
-output
+Output
 
 ```
  switch aComplexCase {
@@ -24,14 +24,13 @@ output
      ()
  }
 ```
-
-
 ## Install
 To install with Automator tool run the shell script below
 ```
-git clone https://eekin@stash.mps.intra.aexp.com/scm/cas/casesorter-swift.git
+git clone https://stash.mps.intra.aexp.com/scm/cas/casesorter-swift.git
 cd casesorter-swift
-sh install.sh
+swift build -c release --build-path ~/.casesorter
+open Sortcases.workflow
 ```
 This will prompt you as dialog to confirm the installation of an automator script. If you accept it you can select a code piece inside Xcode and right click > Services > `Sort cases`  to sort enum and switch cases.
 
