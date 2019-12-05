@@ -15,13 +15,12 @@ let package = Package(
       targets: ["caseSorter-swift"])
   ],
   dependencies: [
-    .package(url: "https://github.com/apple/swift-syntax.git", .exact("0.50000.0")),
-    .package(url: "https://github.com/apple/swift-package-manager.git", from: "0.4.0"),
+    .package(url: "https://github.com/apple/swift-syntax.git", .exact("0.50000.0"))
   ],
   targets: [
     .target(
       name: "CaseSorter",
-      dependencies: ["SwiftSyntax", "SPMUtility"]),
+      dependencies: ["SwiftSyntax"]),
     .testTarget(
       name: "CaseSorterTests",
       dependencies: ["CaseSorter"]),

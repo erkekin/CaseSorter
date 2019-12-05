@@ -1,11 +1,26 @@
 import SwiftSyntax
 import Foundation
-import SPMUtility
-import Basic
 import Cocoa
 import AppKit
 
 public class CaseSorter: SyntaxRewriter {
+
+  public func saveAsFileTemporarily(input: String) throws -> Syntax {
+    var file: URL
+    if #available(OSX 10.12, *) {
+       file = FileManager.default.temporaryDirectory
+    } else {
+      file = URL(fileURLWithPath: NSTemporaryDirectory())
+    }
+    file = file.appendingPathComponent("deneme")
+    try input.write(to: file, atomically: true, encoding: .utf8)
+    defer{
+      try? FileManager.default.removeItem(at: file)
+    }
+
+    let sourceFile = try SyntaxTreeParser.parse(file)
+    return visit(sourceFile)
+  }
 
   public override func visit(_ node: CaseItemListSyntax) -> Syntax {
     super.visit(node.alphaSorted)

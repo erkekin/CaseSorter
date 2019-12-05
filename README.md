@@ -2,6 +2,17 @@
 
 A SPM tool to sort `enum` and `switch` cases
 
+## Usage
+
+Just select a bunch of text in Xcode and right click > Services > `Sort cases` 🎊
+or
+```
+~/.casesorter/release/caseSorter-swift AnySwiftFile.swift
+```
+or
+```
+cat AnySwiftFile.swift | ~/.casesorter/release/caseSorter-swift
+```
 ## Example
 
 Input
@@ -37,5 +48,11 @@ This will prompt you a dialog to confirm the installation of an automator script
 You can assign a keyboard shortcut to the automator script from Settings > Keyboard > Shortcuts > Services >  `Sort cases` 
 
 Please see tests and feel free to contribute.
+
+## Limitations
+* Shouldn't sort Result<T, Error> cases
+* Should sort complex cases like `case (.one, .two)` vertically
+
+Please see tests
 
 Find me on Slack @erkekin

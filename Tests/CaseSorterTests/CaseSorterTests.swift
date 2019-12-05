@@ -1,15 +1,14 @@
 import XCTest
 @testable import CaseSorter
 import SwiftSyntax
-import Basic
 
+@available(OSX 10.12, *)
 final class CaseSorterTests: XCTestCase {
   private var caseSorter: CaseSorter!
 
   override func setUp() {
     super.setUp()
     caseSorter = CaseSorter()
-
   }
 
   override func tearDown() {
@@ -17,8 +16,7 @@ final class CaseSorterTests: XCTestCase {
     super.tearDown()
   }
 
-
-  func testClosureSyntax_defaultCase() {
+  func testClosureSyntax_defaultCase() throws {
     let input = """
                 private func canOpen(serviceType: String) -> Bool {
                   switch serviceType {
@@ -45,12 +43,12 @@ final class CaseSorterTests: XCTestCase {
                    }
                    """
 
-    let actual = visitor(input: input)
+    let actual = try caseSorter.saveAsFileTemporarily(input: input)
     XCTAssertEqual(actual.description, expected)
   }
 
 
-  func testClosureSyntax_nested_enum_switchCases() {
+  func testClosureSyntax_nested_enum_switchCases() throws {
     let input = """
                 enum Theme {
                   case a(String)
@@ -87,13 +85,13 @@ final class CaseSorterTests: XCTestCase {
 
                    """
 
-    let actual = visitor(input: input)
+    let actual = try caseSorter.saveAsFileTemporarily(input: input)
     XCTAssertEqual(actual.description, expected)
   }
 
 
 
-  func testClosureSyntax_switchCaseLet() {
+  func testClosureSyntax_switchCaseLet() throws {
     let input = """
                 switch erk {
                   case .sa, let .da(_):
@@ -112,11 +110,11 @@ final class CaseSorterTests: XCTestCase {
                    }
                    """
 
-    let actual = visitor(input: input)
+    let actual = try caseSorter.saveAsFileTemporarily(input: input)
     XCTAssertEqual(actual.description, expected)
   }
 
-  func testClosureSyntax_complexSwitch() {
+  func testClosureSyntax_complexSwitch() throws {
 
     let input = """
                  extension JSON {
@@ -168,12 +166,12 @@ final class CaseSorterTests: XCTestCase {
                     }
                    """
 
-    let actual = visitor(input: input)
+    let actual = try caseSorter.saveAsFileTemporarily(input: input)
     XCTAssertEqual(actual.description, expected)
   }
 
 
-  func testClosureSyntax_multipleCasesSameRow() {
+  func testClosureSyntax_multipleCasesSameRow() throws {
     let input = """
                  enum Theme {
                    case z,g,c
@@ -192,11 +190,11 @@ final class CaseSorterTests: XCTestCase {
                     }
                    """
 
-    let actual = visitor(input: input)
+    let actual = try caseSorter.saveAsFileTemporarily(input: input)
     XCTAssertEqual(actual.description, expected)
   }
 
-  func testClosureSyntax_caseSensitiveness() {
+  func testClosureSyntax_caseSensitiveness() throws {
     let input = """
                  enum Theme {
                    case Bbc,BBC,BBc
@@ -215,11 +213,11 @@ final class CaseSorterTests: XCTestCase {
                     }
                    """
 
-    let actual = visitor(input: input)
+    let actual = try caseSorter.saveAsFileTemporarily(input: input)
     XCTAssertEqual(actual.description, expected)
   }
 
-  func testClosureSyntax_enum_oneLineCases() {
+  func testClosureSyntax_enum_oneLineCases() throws {
     let input = """
                 enum Theme {
                   case k(String), u, a
@@ -234,11 +232,11 @@ final class CaseSorterTests: XCTestCase {
                    }
                   """
 
-    let actual = visitor(input: input)
+    let actual = try caseSorter.saveAsFileTemporarily(input: input)
     XCTAssertEqual(actual.description, expected)
   }
 
-  func testClosureSyntax_switch_inside_enum() {
+  func testClosureSyntax_switch_inside_enum() throws {
     let input = """
                 enum Theme {
                   case a
@@ -273,11 +271,11 @@ final class CaseSorterTests: XCTestCase {
                    }
                   """
 
-    let actual = visitor(input: input)
+    let actual = try caseSorter.saveAsFileTemporarily(input: input)
     XCTAssertEqual(actual.description, expected)
   }
 
-  func testClosureSyntax_switch_insideStruct() {
+  func testClosureSyntax_switch_insideStruct() throws {
     let input =  """
                 struct Test{
                   init(_ theme: Theme) {
@@ -304,13 +302,13 @@ final class CaseSorterTests: XCTestCase {
                    }
                  """
 
-    let actual = visitor(input: input)
+    let actual = try caseSorter.saveAsFileTemporarily(input: input)
     XCTAssertEqual(actual.description, expected)
   }
 
 
 
-  func testClosureSyntax_enum() {
+  func testClosureSyntax_enum() throws {
     let input =  """
         enum Dnm{
           static let  a =
@@ -350,12 +348,12 @@ final class CaseSorterTests: XCTestCase {
         }
         """
 
-    let actual = visitor(input: input)
+    let actual = try caseSorter.saveAsFileTemporarily(input: input)
     XCTAssertEqual(actual.description, expected)
 
   }
 
-  func testClosureSyntax_switch() {
+  func testClosureSyntax_switch() throws {
 
     let input =
     """
@@ -385,17 +383,19 @@ final class CaseSorterTests: XCTestCase {
       }
       """
 
-    let actual = visitor(input: input)
+    let actual = try caseSorter.saveAsFileTemporarily(input: input)
 
     XCTAssertEqual(actual.description, expected)
   }
 
+
   func visitor(input: String) -> Syntax {
-    let tempfile = try! TemporaryFile(deleteOnClose: true)
-    defer { tempfile.fileHandle.closeFile() }
-    tempfile.fileHandle.write(input.data(using: .utf8)!)
-    let url = URL(fileURLWithPath: tempfile.path.pathString)
-    let sourceFile = try! SyntaxTreeParser.parse(url)
+    let file = FileManager.default.temporaryDirectory.appendingPathComponent("deneme")
+    try! input.write(to: file, atomically: true, encoding: .utf8)
+    defer{
+      try! FileManager.default.removeItem(at: file)
+    }
+    let sourceFile = try! SyntaxTreeParser.parse(file)
     return caseSorter.visit(sourceFile)
   }
 
@@ -444,4 +444,75 @@ final class CaseSorterTests: XCTestCase {
 //  case success = 0, failure
 //}
 
+//
+//enum Event {
+//  case animationStarted(State, UIViewPropertyAnimator)
+//  case autoExpandingFinished
+//  case autoExpandingStarted(UIViewPropertyAnimator)
+//  case cardTapped
+//  case expandedCardSwitcherClosed
+//  case scrolled(Scroll)
+//  case scrollingStopped(Scroll)
+//  case stackedCardsTapped
+//  case stackingFinished
+//  case stackingStarted(UIViewPropertyAnimator)
+//  case viewWillAppear
+//  case viewWillDisappear
+//
+//  struct Scroll {
+//    let offset: CGFloat
+//    let viewHeight: CGFloat
+//
+//    func uncollapseProgress() -> CGFloat {
+//      return (-offset / (stackedHeight - collapsedHeight)) + 1
+//    }
+//
+//    func collapseProgress() -> CGFloat {
+//      return offset / (stackedHeight - collapsedHeight)
+//    }
+//
+//    func expandProgress() -> CGFloat {
+//      let expandHeight = viewHeight - stackedHeight
+//      return -offset / expandHeight
+//    }
+//  }
+//}
 
+
+//
+//
+//public enum InitialState {
+//   case loggingIn
+//   case switchingCards
+//   case selectingCard
+//   case refreshingAccountSummary
+//
+//   var state: State {
+//     switch self {
+//     case .loggingIn, .switchingCards, .selectingCard:
+//       return .expanded(nil)
+//     case .refreshingAccountSummary:
+//       return .stacked(nil)
+//     }
+//   }
+//
+//   var mode: Mode {
+//     switch self {
+//     case .loggingIn, .switchingCards, .selectingCard:
+//       return .expanded
+//     case .refreshingAccountSummary:
+//       return .stacked
+//     }
+//   }
+//
+//   var collapseMode: CollapseMode {
+//     switch self {
+//     case .switchingCards, .refreshingAccountSummary:
+//       return .auto(delay: nil)
+//     case .selectingCard:
+//       return .manual
+//     case .loggingIn:
+//       return .auto(delay: 1.0)
+//     }
+//   }
+// }
