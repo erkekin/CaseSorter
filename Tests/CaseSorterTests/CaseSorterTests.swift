@@ -16,6 +16,33 @@ final class CaseSorterTests: XCTestCase {
     super.tearDown()
   }
 
+  func testSwitchSyntax_withTuple() throws {
+    let input = """
+                 switch (one, two) {
+                     case (_ , .dz, .a):
+                         break
+                     case (.nm, .mj, .sfdf):
+                         break
+                     case let .afhjgj(a):
+                         break
+                 }
+                 """
+
+    let expected = """
+                 switch (one, two) {
+                     case (_ , .dz, .a):
+                         break
+                     case let .afhjgj(a):
+                         break
+                     case (.nm, .mj, .sfdf):
+                         break
+                 }
+                 """
+
+    let actual = try caseSorter.saveAsFileTemporarily(input: input)
+    XCTAssertEqual(actual.description, expected)
+  }
+
   func testClosureSyntax_defaultCase() throws {
     let input = """
                 private func canOpen(serviceType: String) -> Bool {
@@ -69,8 +96,6 @@ final class CaseSorterTests: XCTestCase {
 
     let expected = """
                    enum Theme {
-                     case a(String)
-                     case b(Int)
 
                      func e(ss: Theme) {
                        switch ss {
@@ -80,6 +105,8 @@ final class CaseSorterTests: XCTestCase {
                          ()
                        }
                      }
+                     case a(String)
+                     case b(Int)
                      case s
                    }
 
@@ -256,8 +283,6 @@ final class CaseSorterTests: XCTestCase {
 
     let expected = """
                    enum Theme {
-                     case a
-                     case b
                      init?(_ str: String) {
                        switch str {
                        case "a":
@@ -268,6 +293,8 @@ final class CaseSorterTests: XCTestCase {
                          return nil
                        }
                      }
+                     case a
+                     case b
                    }
                   """
 
@@ -331,9 +358,6 @@ final class CaseSorterTests: XCTestCase {
     let expected =
     """
         enum Dnm{
-          case aasd
-          case b(firstOne:String,
-            secondOne: Int)
           func erk(){
 
 
@@ -342,6 +366,9 @@ final class CaseSorterTests: XCTestCase {
           399
           static let  fdfdf =
           399
+          case aasd
+          case b(firstOne:String,
+            secondOne: Int)
           case v
 
           case we
@@ -516,3 +543,50 @@ final class CaseSorterTests: XCTestCase {
 //     }
 //   }
 // }
+
+
+
+//var result: Result<PaginatedResult<AnySearch<Message>.SearchResult>, WebError>? {
+//  didSet {
+//    switch result {
+//    case let .success(result)? where result.items.isEmpty:
+//      viewState = .empty
+//      nextOffset = 0
+//    case let .success(result)?:
+//      viewState = .results(result)
+//      nextOffset = result.offset
+//    case let .failure(error)?:
+//      viewState = .error(error)
+//      nextOffset = 0
+//    case .none:
+//      viewState = .initial
+//      nextOffset = 0
+//    }
+//  }
+//}
+
+enum erk{
+  case a(String)
+  case b(Int)
+  case c
+  case hg
+
+  func erjrr(_ s: erk){
+    switch (s, s) {
+    case (.b(_), _):
+      break
+    case (.c, _):
+      break
+    case (.hg, _):
+      break
+    case (_, .a(_)):
+      break
+    case (_, .c):
+      break
+    case (_, .hg):
+      break
+    case (.a(_), .b(_)):
+      break
+    }
+  }
+}

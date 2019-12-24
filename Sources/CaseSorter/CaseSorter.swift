@@ -46,7 +46,7 @@ protocol AlphaSortable {
 extension CaseItemListSyntax: AlphaSortable {
   func getCaseID(_ syntax: Syntax) -> String {
     guard let of = syntax as? CaseItemSyntax else {
-      return syntax.description.trimmingCharacters(in: .whitespacesAndNewlines)
+      return syntax.description.trimmingCharacters(in: .whitespaces)
     }
 
     let output =  of.pattern.children
@@ -55,7 +55,7 @@ extension CaseItemListSyntax: AlphaSortable {
       .flatMap{$0.children}
       .compactMap{$0 as? MemberAccessExprSyntax}
       .compactMap{$0.description}
-      .first ?? of.description.trimmingCharacters(in: .whitespacesAndNewlines)
+      .first ?? of.description.trimmingCharacters(in: .whitespaces)
     return output
   }
 
@@ -66,13 +66,9 @@ extension CaseItemListSyntax: AlphaSortable {
       } as! [CaseItemSyntax])
       .enumerated()
       .map{
-        
         $1.withTrailingComma(
           (numberOfChildren == $0 + 1)
-          ?
-            nil
-          :
-            SyntaxFactory.makeCommaToken().withTrailingTrivia(.spaces(1))
+            ? nil : SyntaxFactory.makeCommaToken().withTrailingTrivia(.spaces(1))
         )
     }
 
@@ -86,10 +82,10 @@ extension EnumCaseElementListSyntax: AlphaSortable {
     let a = (children
       .sorted{
         $1.description
-          .trimmingCharacters(in: .whitespacesAndNewlines)
+          .trimmingCharacters(in: .whitespaces)
           .caseInsensitiveCompare(
             $0.description
-              .trimmingCharacters(in: .whitespacesAndNewlines)
+              .trimmingCharacters(in: .whitespaces)
           ) == .orderedDescending
       } as! [EnumCaseElementSyntax])
       .enumerated()
@@ -104,7 +100,7 @@ extension EnumCaseElementListSyntax: AlphaSortable {
 extension SwitchStmtSyntax: AlphaSortable {
   func getCaseID(_ syntax: Syntax) -> String {
     guard let of = syntax as? SwitchCaseSyntax else {
-      return syntax.description.trimmingCharacters(in: .whitespacesAndNewlines)
+      return syntax.description.trimmingCharacters(in: .whitespaces)
     }
     let children = of.children.compactMap{$0}
     if children.contains(where: {$0 is SwitchDefaultLabelSyntax}) {
@@ -117,7 +113,7 @@ extension SwitchStmtSyntax: AlphaSortable {
       .compactMap{$0.pattern}
       .first
 
-    let output: String
+    var output: String
 
     switch pattern {
     case is ValueBindingPatternSyntax:
@@ -127,20 +123,34 @@ extension SwitchStmtSyntax: AlphaSortable {
         .compactMap{$0.expression }
         .flatMap{$0.children}
         .compactMap{$0 as? MemberAccessExprSyntax}
-        .compactMap{$0.description}
+        .compactMap{$0.name}
         .first
-      output = a?.description ?? of.description
+      output = a?.description ?? "NOT"
     case is ExpressionPatternSyntax:
-      output = pattern?.description ?? of.description
+      let a = pattern?
+        .children
+        .compactMap{$0 as? TupleExprSyntax}
+        .flatMap{$0.elementList}
+        .compactMap{$0.expression}
+        .first
+      switch a {
+      case is DiscardAssignmentExprSyntax:
+        output = (a as! DiscardAssignmentExprSyntax).description
+      case is MemberAccessExprSyntax:
+        let b = (a as! MemberAccessExprSyntax).name
+        output = b.text
+      default:
+         fatalError()
+      }
     default:
-      output = of.description
+       fatalError()
     }
 
+     debugPrint( output.trimmingCharacters(in: .whitespacesAndNewlines))
     return output.trimmingCharacters(in: .whitespacesAndNewlines)
   }
 
   var alphaSorted: SwitchStmtSyntax {
-
     let switchCaseListSyntax = cases
       .sorted{
         getCaseID($1).caseInsensitiveCompare(getCaseID($0)) == .orderedDescending
@@ -155,17 +165,17 @@ extension SwitchStmtSyntax: AlphaSortable {
 extension EnumDeclSyntax {
   func getCaseID(_ syntax: Syntax) -> String {
     guard let of = syntax as? MemberDeclListItemSyntax else {
-        return syntax.description
-      }
+      return syntax.description
+    }
 
-      let pattern = of.children
-        .compactMap{$0 as? EnumCaseDeclSyntax}
-        .flatMap{$0.elements.alphaSorted}
-        .compactMap{$0.identifier}
-        .first
+    let pattern = of.children
+      .compactMap{$0 as? EnumCaseDeclSyntax}
+      .flatMap{$0.elements.alphaSorted}
+      .compactMap{$0.identifier}
+      .first
 
     return (pattern?.description ?? syntax.description)
-      .trimmingCharacters(in: .whitespacesAndNewlines)
+      .trimmingCharacters(in: .whitespaces)
   }
 
 
