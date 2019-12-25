@@ -16,6 +16,156 @@ final class CaseSorterTests: XCTestCase {
     super.tearDown()
   }
 
+  func testSwitchSyntax_withTuple2() throws {
+    let input = """
+                   enum erk{
+
+                   case c
+                   case hg
+
+                   func erjrr(_ s: erk){
+                     switch (s, s) {
+                     case (.c, _):
+                       break
+                     case (.b(_), _):
+                       break
+
+                     case (.hg, _):
+                       break
+                     case (_, .c):
+                       break
+                     case (_, .a(_)):
+                       break
+
+                     case (_, .hg):
+                       break
+                     case (.a(_), .b(_)):
+                       break
+                     }
+                   }
+
+                   case b(Int)
+                   case a(String)
+                 }
+                 """
+
+    let expected = """
+                 enum erk{
+                   case a(String)
+
+                   case b(Int)
+
+                   case c
+                   case hg
+
+                   func erjrr(_ s: erk){
+                     switch (s, s) {
+                     case (_, .a(_)):
+                       break
+                     case (_, .c):
+                       break
+
+                     case (_, .hg):
+                       break
+                     case (.c, _):
+                       break
+                     case (.a(_), .b(_)):
+                       break
+                     case (.b(_), _):
+                       break
+
+                     case (.hg, _):
+                       break
+                     }
+                   }
+                 }
+                 """
+
+    let actual = try caseSorter.saveAsFileTemporarily(input: input)
+    XCTAssertEqual(actual.description, expected)
+  }
+
+  func testEnumSyntax_withComputedVariables() throws {
+    let input = """
+                  public enum InitialState {
+                    case loggingIn
+                    case switchingCards
+                    case selectingCard
+                    case refreshingAccountSummary
+
+                    var state: State {
+                      switch self {
+                      case .loggingIn, .switchingCards, .selectingCard:
+                        return .expanded(nil)
+                      case .refreshingAccountSummary:
+                        return .stacked(nil)
+                      }
+                    }
+
+                    var mode: Mode {
+                      switch self {
+                      case .loggingIn, .switchingCards, .selectingCard:
+                        return .expanded
+                      case .refreshingAccountSummary:
+                        return .stacked
+                      }
+                    }
+
+                    var collapseMode: CollapseMode {
+                      switch self {
+                      case .switchingCards, .refreshingAccountSummary:
+                        return .auto(delay: nil)
+                      case .selectingCard:
+                        return .manual
+                      case .loggingIn:
+                        return .auto(delay: 1.0)
+                      }
+                    }
+                  }
+                 """
+
+    let expected = """
+     public enum InitialState {
+       case loggingIn
+       case refreshingAccountSummary
+       case selectingCard
+       case switchingCards
+
+       var state: State {
+         switch self {
+         case .loggingIn, .selectingCard, .switchingCards:
+           return .expanded(nil)
+         case .refreshingAccountSummary:
+           return .stacked(nil)
+         }
+       }
+
+       var mode: Mode {
+         switch self {
+         case .loggingIn, .selectingCard, .switchingCards:
+           return .expanded
+         case .refreshingAccountSummary:
+           return .stacked
+         }
+       }
+
+       var collapseMode: CollapseMode {
+         switch self {
+         case .loggingIn:
+           return .auto(delay: 1.0)
+         case .selectingCard:
+           return .manual
+         case .refreshingAccountSummary, .switchingCards:
+           return .auto(delay: nil)
+         }
+       }
+     }
+    """
+
+    let actual = try caseSorter.saveAsFileTemporarily(input: input)
+    XCTAssertEqual(actual.description, expected)
+  }
+
   func testSwitchSyntax_withTuple() throws {
     let input = """
                  switch (one, two) {
@@ -91,11 +241,13 @@ final class CaseSorterTests: XCTestCase {
                   }
                   case s
                 }
-
                 """
 
     let expected = """
                    enum Theme {
+                     case a(String)
+                     case b(Int)
+                     case s
 
                      func e(ss: Theme) {
                        switch ss {
@@ -105,11 +257,7 @@ final class CaseSorterTests: XCTestCase {
                          ()
                        }
                      }
-                     case a(String)
-                     case b(Int)
-                     case s
                    }
-
                    """
 
     let actual = try caseSorter.saveAsFileTemporarily(input: input)
@@ -176,14 +324,14 @@ final class CaseSorterTests: XCTestCase {
                           return array.map { $0.serialize() }
                         case let .bool(bool):
                           return NSNumber(value: bool)
+                        case .null:
+                          return NSNull()
                         case let .dict(dict):
                           var serializedDict = [String: Any]()
                           for (key, value) in dict {
                             serializedDict[key] = value.serialize()
                           }
                           return serializedDict
-                        case .null:
-                          return NSNull()
                         case let .number(number):
                           return number
                         case let .string(string):
@@ -283,6 +431,8 @@ final class CaseSorterTests: XCTestCase {
 
     let expected = """
                    enum Theme {
+                     case a
+                     case b
                      init?(_ str: String) {
                        switch str {
                        case "a":
@@ -293,8 +443,6 @@ final class CaseSorterTests: XCTestCase {
                          return nil
                        }
                      }
-                     case a
-                     case b
                    }
                   """
 
@@ -333,8 +481,6 @@ final class CaseSorterTests: XCTestCase {
     XCTAssertEqual(actual.description, expected)
   }
 
-
-
   func testClosureSyntax_enum() throws {
     let input =  """
         enum Dnm{
@@ -358,20 +504,20 @@ final class CaseSorterTests: XCTestCase {
     let expected =
     """
         enum Dnm{
-          func erk(){
-
-
-          }
-          static let  a =
-          399
-          static let  fdfdf =
-          399
           case aasd
           case b(firstOne:String,
             secondOne: Int)
           case v
 
           case we
+          static let  a =
+          399
+          static let  fdfdf =
+          399
+          func erk(){
+
+
+          }
         }
         """
 
@@ -432,41 +578,6 @@ final class CaseSorterTests: XCTestCase {
 }
 
 
-
-
-//switch (lhs, rhs) {
-//case (.howItWorks, .howItWorks),
-//           (.summary, .summary):
-//         (.processingPlan, .processingPlan),
-//     (.normalPlan, .normalPlan),
-//
-//
-//  return true
-//case (.normalPlan, _),
-//          (.summary, _):
-//     (.howItWorks, _),
-//     (.processingPlan, _),
-//
-//  return false
-//}
-
-
-//enum Theme {
-//  case a(String)
-//  case b(Int)
-//
-//  func e(ss: Theme) {
-//    switch ss {
-//    case let .a(_),.s:
-//      ()
-//    default:
-//      ()
-//    }
-//  }
-//  case s
-//}
-//
-//
 //enum MessageType: Int {
 //  case success = 0, failure
 //}
@@ -506,8 +617,6 @@ final class CaseSorterTests: XCTestCase {
 //}
 
 
-//
-//
 //public enum InitialState {
 //   case loggingIn
 //   case switchingCards
@@ -544,8 +653,6 @@ final class CaseSorterTests: XCTestCase {
 //   }
 // }
 
-
-
 //var result: Result<PaginatedResult<AnySearch<Message>.SearchResult>, WebError>? {
 //  didSet {
 //    switch result {
@@ -564,29 +671,3 @@ final class CaseSorterTests: XCTestCase {
 //    }
 //  }
 //}
-
-enum erk{
-  case a(String)
-  case b(Int)
-  case c
-  case hg
-
-  func erjrr(_ s: erk){
-    switch (s, s) {
-    case (.b(_), _):
-      break
-    case (.c, _):
-      break
-    case (.hg, _):
-      break
-    case (_, .a(_)):
-      break
-    case (_, .c):
-      break
-    case (_, .hg):
-      break
-    case (.a(_), .b(_)):
-      break
-    }
-  }
-}

@@ -8,7 +8,7 @@ public class CaseSorter: SyntaxRewriter {
   public func saveAsFileTemporarily(input: String) throws -> Syntax {
     var file: URL
     if #available(OSX 10.12, *) {
-       file = FileManager.default.temporaryDirectory
+      file = FileManager.default.temporaryDirectory
     } else {
       file = URL(fileURLWithPath: NSTemporaryDirectory())
     }
@@ -90,7 +90,7 @@ extension EnumCaseElementListSyntax: AlphaSortable {
       } as! [EnumCaseElementSyntax])
       .enumerated()
       .map{
-        $1.withTrailingComma( (numberOfChildren == $0 + 1) ? nil : SyntaxFactory.makeCommaToken().withTrailingTrivia(.spaces(1)))
+        $1.withTrailingComma((numberOfChildren == $0 + 1) ? nil : SyntaxFactory.makeCommaToken().withTrailingTrivia(.spaces(1)))
     }
 
     return SyntaxFactory.makeEnumCaseElementList(a)
@@ -140,13 +140,12 @@ extension SwitchStmtSyntax: AlphaSortable {
         let b = (a as! MemberAccessExprSyntax).name
         output = b.text
       default:
-         fatalError()
+        output = syntax.description
       }
     default:
-       fatalError()
+      output = syntax.description
     }
 
-     debugPrint( output.trimmingCharacters(in: .whitespacesAndNewlines))
     return output.trimmingCharacters(in: .whitespacesAndNewlines)
   }
 
@@ -165,7 +164,7 @@ extension SwitchStmtSyntax: AlphaSortable {
 extension EnumDeclSyntax {
   func getCaseID(_ syntax: Syntax) -> String {
     guard let of = syntax as? MemberDeclListItemSyntax else {
-      return syntax.description
+      return syntax.description.trimmingCharacters(in: .whitespaces)
     }
 
     let pattern = of.children
@@ -174,20 +173,26 @@ extension EnumDeclSyntax {
       .compactMap{$0.identifier}
       .first
 
-    return (pattern?.description ?? syntax.description)
-      .trimmingCharacters(in: .whitespaces)
+    return pattern?.text ?? syntax.description.trimmingCharacters(in: .whitespaces)
   }
 
-
   var alphaSorted: EnumDeclSyntax {
-    let a = members.members
+    let enumCaseDecls = members
+      .members
+      .filter{$0.decl is EnumCaseDeclSyntax}
+
+    let otherDecls = members
+         .members
+         .filter{!($0.decl is EnumCaseDeclSyntax)}
+
+    let sortedEnumCaseDecls = enumCaseDecls
       .sorted{
         getCaseID($1).caseInsensitiveCompare(getCaseID($0)) == .orderedDescending
     }
 
     return withMembers(SyntaxFactory.makeMemberDeclBlock(
       leftBrace: members.leftBrace,
-      members: SyntaxFactory.makeMemberDeclList(a),
+      members: SyntaxFactory.makeMemberDeclList(sortedEnumCaseDecls + otherDecls),
       rightBrace: members.rightBrace
     ))
   }
