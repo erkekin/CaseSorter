@@ -54,5 +54,3 @@ Please see tests and feel free to contribute.
 * Should sort complex cases like `case (.one, .two)` vertically
 
 Please see tests
-
-Find me on Slack @erkekin
