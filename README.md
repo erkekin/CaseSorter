@@ -1,6 +1,6 @@
 # CaseSorter
 
-A SPM tool to sort `enum` and `switch` cases
+A SPM tool to sort `enum` and `switch` cases.
 
 ## Usage
 
