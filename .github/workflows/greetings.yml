@@ -8,7 +8,7 @@ jobs:
     steps:
     - name: Hello world action step
       id: hello
-      uses: actions/sort-enums-action@v1
+      uses: erkekin/sort-enums-action@v1
       with:
         who-to-greet: 'ERK DENEME'
     # Use the output from the `hello` step
