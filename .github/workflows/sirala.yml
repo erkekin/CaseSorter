@@ -13,7 +13,7 @@ jobs:
       uses: erkekin/sort-enums-action@v3
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - run: touch deneme.txt
+    - run: touch deneme.txt && pwd && git add . && git status
       id: add-new-file
     - name: Create Pull Request
       if: steps.sort-cases.outputs.exit-code == 2
