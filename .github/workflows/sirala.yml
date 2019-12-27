@@ -8,12 +8,10 @@ jobs:
     if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/sortcases')
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@master
-    - name: Automatic Sort Cases
-      uses: erkekin/sort-enums-action@v3
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Changed Files Exporter
+    - uses: futuratrepadeira/changed-files@v3.0.0           
     - run: |
+        echo "updated ${{ steps.vars.outputs.files_updated }}"
         curl -sL https://github.com/erkekin/sort-enums-action/releases/download/v2/v2.tar | tar xz
         chmod u+x ./v2/caseSorter-swift
         ./v2/caseSorter-swift Tests/CaseSorterTests/CaseSorterTests.swift
