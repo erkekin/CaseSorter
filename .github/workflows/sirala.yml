@@ -18,7 +18,7 @@ jobs:
         chmod u+x ./v2/caseSorter-swift
         ls -a
         pwd
-        cat /Tests/CaseSorterTests/CaseSorterTests.swift
+        cat Tests/CaseSorterTests/CaseSorterTests.swift
         rm -rf v2
       id: download-sorter
     - name: Create Pull Request
