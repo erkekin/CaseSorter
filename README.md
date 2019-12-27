@@ -55,4 +55,4 @@ Please see tests and feel free to contribute.
 
 Please see tests
 
-Find me on Slack @erkekin
+Find me on @erkekin
