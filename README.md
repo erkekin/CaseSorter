@@ -4,6 +4,7 @@ A SPM tool to sort `enum` and `switch` cases.
 
 ## Usage
 
+
 Just select a bunch of text in Xcode and right click > Services > `Sort cases` 🎊
 or
 ```
