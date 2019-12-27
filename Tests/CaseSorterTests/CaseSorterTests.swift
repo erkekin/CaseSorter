@@ -18,7 +18,7 @@ final class CaseSorterTests: XCTestCase {
 
   func testSwitchSyntax_withTuple2() throws {
     let input = """
-                   enum erk{
+                 enum erk{
 
                    case c
                    case hg
@@ -60,9 +60,9 @@ final class CaseSorterTests: XCTestCase {
 
                    func erjrr(_ s: erk){
                      switch (s, s) {
-                     case (_, .a(_)):
-                       break
                      case (_, .c):
+                       break
+                     case (_, .a(_)):
                        break
 
                      case (_, .hg):
