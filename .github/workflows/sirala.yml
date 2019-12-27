@@ -15,7 +15,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - run: |
         curl -sL https://github.com/erkekin/sort-enums-action/releases/download/v2/v2.tar | tar xz
-        ./v2/caseSorter-swift Tests/CaseSorterTests/CaseSorterTests.swift
+        ./v2/caseSorter-swift /Tests/CaseSorterTests/CaseSorterTests.swift
         rm -rf v2
       id: download-sorter
     - name: Create Pull Request
