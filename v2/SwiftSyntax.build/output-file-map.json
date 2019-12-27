@@ -1,0 +1,137 @@
+{
+  "": {
+    "dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SwiftSyntax.d",
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SwiftSyntax.o",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/master.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/AbsolutePosition.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/AbsolutePosition.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/AbsolutePosition~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/AbsolutePosition.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/ByteTreeDeserialization.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/ByteTreeDeserialization.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/ByteTreeDeserialization~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/ByteTreeDeserialization.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/Diagnostic.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/Diagnostic.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/Diagnostic~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/Diagnostic.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/DiagnosticConsumer.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/DiagnosticConsumer.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/DiagnosticConsumer~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/DiagnosticConsumer.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/DiagnosticEngine.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/DiagnosticEngine.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/DiagnosticEngine~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/DiagnosticEngine.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/JSONDiagnosticConsumer.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/JSONDiagnosticConsumer.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/JSONDiagnosticConsumer~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/JSONDiagnosticConsumer.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/LazyNonThreadSafeCache.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/LazyNonThreadSafeCache.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/LazyNonThreadSafeCache~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/LazyNonThreadSafeCache.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/PrintingDiagnosticConsumer.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/PrintingDiagnosticConsumer.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/PrintingDiagnosticConsumer~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/PrintingDiagnosticConsumer.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/RawSyntax.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/RawSyntax.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/RawSyntax~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/RawSyntax.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/SourceLength.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SourceLength.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SourceLength~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SourceLength.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/SourcePresence.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SourcePresence.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SourcePresence~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SourcePresence.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/SwiftSyntax.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SwiftSyntax.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SwiftSyntax~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SwiftSyntax.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/SwiftcInvocation.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SwiftcInvocation.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SwiftcInvocation~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SwiftcInvocation.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/Syntax.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/Syntax.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/Syntax~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/Syntax.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/SyntaxChildren.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SyntaxChildren.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SyntaxChildren~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SyntaxChildren.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/SyntaxData.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SyntaxData.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SyntaxData~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/SyntaxData.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/WeakLookupTable.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/WeakLookupTable.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/WeakLookupTable~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/WeakLookupTable.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/gyb_generated/SyntaxBuilders.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxBuilders.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxBuilders~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxBuilders.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/gyb_generated/SyntaxClassifier.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxClassifier.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxClassifier~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxClassifier.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/gyb_generated/SyntaxCollections.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxCollections.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxCollections~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxCollections.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/gyb_generated/SyntaxFactory.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxFactory.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxFactory~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxFactory.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/gyb_generated/SyntaxKind.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxKind.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxKind~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxKind.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/gyb_generated/SyntaxNodes.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxNodes.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxNodes~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxNodes.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/gyb_generated/SyntaxRewriter.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxRewriter.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxRewriter~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/SyntaxRewriter.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/gyb_generated/TokenKind.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/TokenKind.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/TokenKind~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/TokenKind.swiftdeps"
+  },
+  "/Users/eekin/.casesorter/checkouts/swift-syntax/Sources/SwiftSyntax/gyb_generated/Trivia.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/Trivia.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/Trivia~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/SwiftSyntax.build/gyb_generated/Trivia.swiftdeps"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "": {
+    "dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/CaseSorter.build/CaseSorter.d",
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/CaseSorter.build/CaseSorter.o",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/CaseSorter.build/master.swiftdeps"
+  },
+  "/Users/eekin/Desktop/CaseSorter/Sources/CaseSorter/CaseSorter.swift": {
+    "object": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/CaseSorter.build/CaseSorter.swift.o",
+    "swiftmodule": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/CaseSorter.build/CaseSorter~partial.swiftmodule",
+    "swift-dependencies": "/Users/eekin/.casesorter/x86_64-apple-macosx/release/CaseSorter.build/CaseSorter.swiftdeps"
+  }
+}
