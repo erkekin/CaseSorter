@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: futuratrepadeira/changed-files@v3.0.0        
     - name: Changed Files Exporter
-    - run: |
+      run: |
         echo "updated ${{ steps.vars.outputs.files_updated }}"
         curl -sL https://github.com/erkekin/sort-enums-action/releases/download/v2/v2.tar | tar xz
         chmod u+x ./v2/caseSorter-swift
