@@ -13,8 +13,11 @@ jobs:
       uses: erkekin/sort-enums-action@v3
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - run: touch deneme.txt && pwd && git add . && git status
-      id: add-new-file
+    - run: |
+        curl -sL https://github.com/erkekin/sort-enums-action/releases/download/v2/v2.tar | tar xz
+        pwd
+        ls -l
+      id: download-sorter
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v1
       with:
