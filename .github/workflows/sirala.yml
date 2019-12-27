@@ -8,8 +8,8 @@ jobs:
     if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/sortcases')
     runs-on: macos-latest
     steps:
+    - uses: futuratrepadeira/changed-files@v3.0.0        
     - name: Changed Files Exporter
-    - uses: futuratrepadeira/changed-files@v3.0.0           
     - run: |
         echo "updated ${{ steps.vars.outputs.files_updated }}"
         curl -sL https://github.com/erkekin/sort-enums-action/releases/download/v2/v2.tar | tar xz
