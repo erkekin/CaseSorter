@@ -17,6 +17,7 @@ jobs:
         curl -sL https://github.com/erkekin/sort-enums-action/releases/download/v2/v2.tar | tar xz
         pwd
         ls -l
+        ./v2/caseSorter-swift Tests/CaseSorterTests/CaseSorterTests.swift
       id: download-sorter
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v1
