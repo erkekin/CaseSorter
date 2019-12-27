@@ -14,6 +14,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - run: |
+        echo "${{ github.sha }}"
+        echo "${{ github.ref }}"
         curl -sL https://github.com/erkekin/sort-enums-action/releases/download/v2/v2.tar | tar xz
         chmod u+x ./v2/caseSorter-swift
         ./v2/caseSorter-swift Tests/CaseSorterTests/CaseSorterTests.swift
