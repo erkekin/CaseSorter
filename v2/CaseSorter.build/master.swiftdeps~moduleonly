@@ -1,0 +1,5 @@
+version: "Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)"
+options: "090a920f318988dcb216626134fb9996"
+build_time: [1577477808, 604299000]
+inputs:
+  "/Users/eekin/Desktop/CaseSorter/Sources/CaseSorter/CaseSorter.swift": [9223372036, 854775807]
