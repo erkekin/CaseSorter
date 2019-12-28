@@ -584,6 +584,13 @@ enum MyTest{
   case a
 }
 
+enum MyTest1{
+  case ddfgdf
+  case cfdgdf
+  case bg
+  case agdfg
+}
+
 //enum MessageType: Int {
 //  case success = 0, failure
 //}
