@@ -1,6 +1,7 @@
-on: 
-  issue_comment:
-    types: [created]
+# on: 
+#   issue_comment:
+#     types: [created]
+on: pull_request
 name: sort-cases
 jobs:
   sort:
