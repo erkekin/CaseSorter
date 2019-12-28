@@ -7,11 +7,11 @@ A SPM tool to sort `enum` and `switch` cases.
 Just select a bunch of text in Xcode and right click > Services > `Sort cases` 🎊
 or
 ```
-~/.casesorter/release/caseSorter-swift AnySwiftFile.swift
+$ ~/.casesorter/release/caseSorter-swift AnySwiftFile.swift
 ```
 or
 ```
-cat AnySwiftFile.swift | ~/.casesorter/release/caseSorter-swift
+$ cat AnySwiftFile.swift | ~/.casesorter/release/caseSorter-swift
 ```
 ## Example
 
@@ -51,8 +51,7 @@ Please see tests and feel free to contribute.
 
 ## Limitations
 * Shouldn't sort Result<T, Error> cases
-* Should sort complex cases like `case (.one, .two)` vertically
 
 Please see tests
 
-Find me on Slack @erkekin
+Find me on Twitter @erkekin
