@@ -578,10 +578,10 @@ final class CaseSorterTests: XCTestCase {
 }
 
 enum MyTest{
-  case d
-  case c
-  case b
   case a
+  case b
+  case c
+  case d
 }
 
 //enum MessageType: Int {
