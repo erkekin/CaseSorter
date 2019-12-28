@@ -6,7 +6,7 @@ name: sort-cases
 jobs:
   sort:
     name: Sort
-    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/sortcases')
+    # if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/sortcases')
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@master
