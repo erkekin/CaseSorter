@@ -578,10 +578,10 @@ final class CaseSorterTests: XCTestCase {
 }
 
 enum MyTest1{
-  case ddfgdf
-  case cfdgdf
-  case bg
   case agdfg
+  case bg
+  case cfdgdf
+  case ddfgdf
 }
 //enum MessageType: Int {
 //  case success = 0, failure
