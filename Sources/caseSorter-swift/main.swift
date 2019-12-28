@@ -24,6 +24,6 @@ if let file = CommandLine.arguments.last,
     print(line, to: &input)
   }
   let syntax = try caseSorter.saveAsFileTemporarily(input: input)
-  let output = syntax.description.trimmingCharacters(in: .whitespacesAndNewlines)
+  let output = syntax.description
   print(output)
 }
