@@ -4,14 +4,14 @@ import Cocoa
 import AppKit
 
 enum Trial {
+  case a
   case b
   case z(String)
-  case a
 }
 
 enum deneme{
-  case z
   case a
+  case z
 }
 
 public class CaseSorter: SyntaxRewriter {
@@ -127,16 +127,6 @@ extension SwitchStmtSyntax: AlphaSortable {
     var output: String
 
     switch pattern {
-    case is ValueBindingPatternSyntax:
-      let a = (pattern as? ValueBindingPatternSyntax)?
-        .children
-        .compactMap{$0 as? ExpressionPatternSyntax}
-        .compactMap{$0.expression }
-        .flatMap{$0.children}
-        .compactMap{$0 as? MemberAccessExprSyntax}
-        .compactMap{$0.name}
-        .first
-      output = a?.description ?? "NOT"
     case is ExpressionPatternSyntax:
       let a = pattern?
         .children
@@ -153,6 +143,16 @@ extension SwitchStmtSyntax: AlphaSortable {
       default:
         output = syntax.description
       }
+    case is ValueBindingPatternSyntax:
+      let a = (pattern as? ValueBindingPatternSyntax)?
+        .children
+        .compactMap{$0 as? ExpressionPatternSyntax}
+        .compactMap{$0.expression }
+        .flatMap{$0.children}
+        .compactMap{$0 as? MemberAccessExprSyntax}
+        .compactMap{$0.name}
+        .first
+      output = a?.description ?? "NOT"
     default:
       output = syntax.description
     }
