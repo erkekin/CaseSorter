@@ -1,4 +1,4 @@
-on: push
+on: pull_request
 name: sort-cases
 jobs:
   sortcases:
@@ -8,10 +8,15 @@ jobs:
     - uses: actions/checkout@master
       with: 
         ref: ${{ github.head_ref }}
+    - name: Changed Files Exporter
+      uses: futuratrepadeira/changed-files@v3.0.0
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+      id: files
     - name: Automatic Sort Cases
       uses: erkekin/CaseSorter@master
       with: 
-        files: Sources/CaseSorter/CaseSorter.swift
+        files: ${{ steps.files.outputs.files_updated }}
         repo-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v1
