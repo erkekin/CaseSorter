@@ -1,4 +1,4 @@
 enum Test {
-    case z
     case a
+    case z
 }
