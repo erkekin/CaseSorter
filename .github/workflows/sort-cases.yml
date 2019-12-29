@@ -16,7 +16,7 @@ jobs:
     - name: Automatic Sort Cases
       uses: erkekin/CaseSorter@master
       with: 
-        files: ${{ steps.files.outputs.files_updated }}
+        files: ${{ steps.files.outputs.files_updated + steps.files.outputs.files_created }}
         repo-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v1

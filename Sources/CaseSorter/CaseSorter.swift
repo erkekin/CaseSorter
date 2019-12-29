@@ -4,7 +4,10 @@ import Cocoa
 import AppKit
 
 public class CaseSorter: SyntaxRewriter {
-
+enum Test {
+    case z
+    case a
+}
   public func saveAsFileTemporarily(input: String) throws -> Syntax {
     var file: URL
     if #available(OSX 10.12, *) {
