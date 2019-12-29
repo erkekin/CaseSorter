@@ -11,7 +11,7 @@ jobs:
     - name: Automatic Sort Cases
       uses: erkekin/sort-enums-action@master
       with: 
-        files: Tests/CaseSorterTests/CaseSorterTests.swift
+        files: Sources/CaseSorter/CaseSorter.swift
       id: download-sorter
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v1
