@@ -15,10 +15,13 @@ func writeTo(path: String) throws {
   }
 }
 
-if let file = CommandLine.arguments.last,
-  URL(fileURLWithPath: file).pathExtension == "swift" {
-  try writeTo(path: file)
-} else {
+if CommandLine.arguments.count > 0 {
+  try Set(
+    CommandLine.arguments
+      .filter{URL(fileURLWithPath: $0).pathExtension == "swift"}
+  )
+    .forEach{try writeTo(path: $0)}
+} else { // source code into standart input, used by automator script
   var input = ""
   while let line = readLine() {
     print(line, to: &input)
