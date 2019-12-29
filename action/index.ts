@@ -8,7 +8,7 @@ class ChangedFiles {
 }
 
 function getPrNumber(): number | null {
-    console.log(github.context.payload.pull_request
+    console.log(github.context.payload.pull_request)
     const pullRequest = github.context.payload.pull_request
     return pullRequest ? pullRequest.number : null
 }
