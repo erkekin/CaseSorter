@@ -1,6 +1,6 @@
 # CaseSorter
  
-A SPM tool to sort `enum` and `switch` cases. This Swift project automatically checks proposed changes in Pull Requests, sorts its `enum` and `switch` cases and creates a new Pull Request with sorted changes.
+A SPM tool to sort `enum` and `switch` cases. This Swift project automatically checks proposed changes in Pull Requests, sorts `enum` and `switch` cases and creates a new Pull Request along with sorted changes.
 
 ## Usage
 
@@ -57,12 +57,14 @@ Please see tests and feel free to contribute.
 
 ### Installation
 ```
-- name: Sort Swift Enum Cases
-  uses: erkekin/CaseSorter@v1
+    - name: Changed Files Exporter
+      uses: futuratrepadeira/changed-files@v3.0.0
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ### Example
-You can add this action to your swift project and sort changed files in a pull request. It even creates a new pull request with swift enums sorted.
+You can add this action to your Swift project and sort changed files of a pull request. It even creates a new pull request along with Swift enums sorted.
 ```
 on: pull_request
 name: sort-cases
@@ -74,11 +76,16 @@ jobs:
     - uses: actions/checkout@master
       with: 
         ref: ${{ github.head_ref }}
+    - name: Changed Files Exporter
+      uses: futuratrepadeira/changed-files@v3.0.0
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+      id: files
     - name: Automatic Sort Cases
       uses: erkekin/CaseSorter@master
       with: 
-        files: Sources/CaseSorter/CaseSorter.swift
-      id: download-sorter
+        files: "${{ steps.files.outputs.files_updated }} ${{ steps.files.outputs.files_created }}"
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v1
       with:
@@ -86,14 +93,15 @@ jobs:
         commit-message: enum cases sorted
         title: Case Sorter in Action
         body: This is an auto-generated PR with fixes by case sorter tool.
-        labels: sort, automated pr
+        labels: sort, automated pr, enum
         branch: ${{ steps.vars.outputs.branch-name }}
         branch-suffix: none
+
 ```
 
 ## Limitations
-* Shouldn't sort Result<T, Error> cases
+* Shouldn't sort Result<T, Error> cases, contributions welcome.
 
-Please see `tests`
+Please see tests.
 
 Find me on Twitter @erkekin
