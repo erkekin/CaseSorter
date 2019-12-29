@@ -8,6 +8,12 @@ jobs:
     - uses: actions/checkout@master
       with: 
         ref: ${{ github.head_ref }}
+    - name: Changed Files Exporter
+      uses: futuratrepadeira/changed-files@v3.0.0
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+      id: files
+    - run: echo ${{ steps.vars.outputs.files_updated }}
     - name: Automatic Sort Cases
       uses: erkekin/CaseSorter@master
       with: 
