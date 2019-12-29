@@ -12,6 +12,7 @@ jobs:
       uses: erkekin/CaseSorter@master
       with: 
         files: Sources/CaseSorter/CaseSorter.swift
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v1
       with:
