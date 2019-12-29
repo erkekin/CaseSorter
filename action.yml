@@ -1,0 +1,13 @@
+name: 'Sort Swift Enum Cases'
+description: 'Sort swift enum cases GitHub action'
+author: 'Erk Ekin'
+inputs: 
+  files:
+    description: 'Swift files to sort enums of.'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'
+branding:
+  icon: 'bar-chart'  
+  color: 'blue'

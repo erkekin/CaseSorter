@@ -1,0 +1,27 @@
+{
+  "name": "Sort Swift Enum Cases",
+  "version": "v1",
+  "description": "Sort swift enum cases GitHub action",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erkekin/sort-enums-action.git"
+  },
+  "keywords": [
+    "case sorter",
+    "swift"
+  ],
+  "author": "Erk Ekin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erkekin/sort-enums-action/issues"
+  },
+  "homepage": "https://github.com/erkekin/sort-enums-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.0",
+    "@actions/github": "^2.0.0"
+  }
+}

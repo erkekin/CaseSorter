@@ -1,0 +1,25 @@
+on: pull_request
+name: sort-cases
+jobs:
+  sortcases:
+    name: Sort
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@master
+      with: 
+        ref: ${{ github.head_ref }}
+    - name: Automatic Sort Cases
+      uses: erkekin/sort-enums-action@master
+      with: 
+        files: Sources/CaseSorter/CaseSorter.swift
+      id: download-sorter
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: enum cases sorted
+        title: Case Sorter in Action
+        body: This is an auto-generated PR with fixes by case sorter tool.
+        labels: sort, automated pr
+        branch: ${{ steps.vars.outputs.branch-name }}
+        branch-suffix: none
