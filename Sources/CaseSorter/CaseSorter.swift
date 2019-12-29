@@ -3,17 +3,6 @@ import Foundation
 import Cocoa
 import AppKit
 
-enum Trial {
-  case b
-  case z(String)
-  case a
-}
-
-enum deneme{
-  case z
-  case a
-}
-
 public class CaseSorter: SyntaxRewriter {
 
   public func saveAsFileTemporarily(input: String) throws -> Syntax {
