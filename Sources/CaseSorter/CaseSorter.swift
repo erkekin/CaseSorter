@@ -9,6 +9,11 @@ enum Trial {
   case a
 }
 
+enum deneme{
+  case z
+  case a
+}
+
 public class CaseSorter: SyntaxRewriter {
 
   public func saveAsFileTemporarily(input: String) throws -> Syntax {

@@ -13,21 +13,18 @@ jobs:
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
       id: files
-    - run: |
-        echo ${{ steps.files.outputs.files_updated }}
-        echo ${{ steps.files.outputs.files_created }}
-    # - name: Automatic Sort Cases
-    #   uses: erkekin/CaseSorter@master
-    #   with: 
-    #     files: Sources/CaseSorter/CaseSorter.swift
-    #     repo-token: ${{ secrets.GITHUB_TOKEN }}
-    # - name: Create Pull Request
-    #   uses: peter-evans/create-pull-request@v1
-    #   with:
-    #     token: ${{ secrets.GITHUB_TOKEN }}
-    #     commit-message: enum cases sorted
-    #     title: Case Sorter in Action
-    #     body: This is an auto-generated PR with fixes by case sorter tool.
-    #     labels: sort, automated pr, enum
-    #     branch: ${{ steps.vars.outputs.branch-name }}
-    #     branch-suffix: none
+    - name: Automatic Sort Cases
+      uses: erkekin/CaseSorter@master
+      with: 
+        files: steps.files.outputs.files_updated
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: enum cases sorted
+        title: Case Sorter in Action
+        body: This is an auto-generated PR with fixes by case sorter tool.
+        labels: sort, automated pr, enum
+        branch: ${{ steps.vars.outputs.branch-name }}
+        branch-suffix: none
