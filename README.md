@@ -43,7 +43,7 @@ $ cat AnySwiftFile.swift | ~/.casesorter/release/caseSorter-swift
 To install with Automator tool, run the shell script below.
 ```
 git clone https://github.com/erkekin/CaseSorter.git
-cd casesorter-swift
+cd CaseSorter
 swift build -c release --build-path ~/.casesorter
 open Sortcases.workflow
 ```
