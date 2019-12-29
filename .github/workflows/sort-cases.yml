@@ -14,8 +14,8 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
       id: files
     - run: |
-        echo ${{ steps.vars.outputs.files_updated }}
-        echo ${{ steps.vars.outputs.files_created }}
+        echo ${{ steps.files.outputs.files_updated }}
+        echo ${{ steps.files.outputs.files_created }}
     # - name: Automatic Sort Cases
     #   uses: erkekin/CaseSorter@master
     #   with: 
