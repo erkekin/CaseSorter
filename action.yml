@@ -1,0 +1,13 @@
+name: 'Sort cases'
+description: 'Sort Swift enum & switch cases'
+author: 'Erk Ekin'
+inputs: 
+  files:
+    description: 'Swift files to sort enums of.'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'
+branding:
+  icon: 'swift.svg'  
+  color: 'blue'
