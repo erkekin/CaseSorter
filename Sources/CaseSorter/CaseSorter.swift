@@ -5,8 +5,8 @@ import AppKit
 
 public class CaseSorter: SyntaxRewriter {
 enum Test {
-    case z
     case a
+    case z
 }
   public func saveAsFileTemporarily(input: String) throws -> Syntax {
     var file: URL
@@ -119,16 +119,6 @@ extension SwitchStmtSyntax: AlphaSortable {
     var output: String
 
     switch pattern {
-    case is ValueBindingPatternSyntax:
-      let a = (pattern as? ValueBindingPatternSyntax)?
-        .children
-        .compactMap{$0 as? ExpressionPatternSyntax}
-        .compactMap{$0.expression }
-        .flatMap{$0.children}
-        .compactMap{$0 as? MemberAccessExprSyntax}
-        .compactMap{$0.name}
-        .first
-      output = a?.description ?? "NOT"
     case is ExpressionPatternSyntax:
       let a = pattern?
         .children
@@ -145,6 +135,16 @@ extension SwitchStmtSyntax: AlphaSortable {
       default:
         output = syntax.description
       }
+    case is ValueBindingPatternSyntax:
+      let a = (pattern as? ValueBindingPatternSyntax)?
+        .children
+        .compactMap{$0 as? ExpressionPatternSyntax}
+        .compactMap{$0.expression }
+        .flatMap{$0.children}
+        .compactMap{$0 as? MemberAccessExprSyntax}
+        .compactMap{$0.name}
+        .first
+      output = a?.description ?? "NOT"
     default:
       output = syntax.description
     }
