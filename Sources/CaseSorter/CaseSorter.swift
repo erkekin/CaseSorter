@@ -3,8 +3,9 @@ import Foundation
 import Cocoa
 import AppKit
 
-enum Trial{
-  case z
+enum Trial {
+  case b
+  case z(String)
   case a
 }
 
