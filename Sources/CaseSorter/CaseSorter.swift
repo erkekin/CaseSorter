@@ -4,10 +4,6 @@ import Cocoa
 import AppKit
 
 public class CaseSorter: SyntaxRewriter {
-enum Test {
-    case z
-    case a
-}
   public func saveAsFileTemporarily(input: String) throws -> Syntax {
     var file: URL
     if #available(OSX 10.12, *) {
@@ -106,6 +102,8 @@ extension SwitchStmtSyntax: AlphaSortable {
       return syntax.description.trimmingCharacters(in: .whitespaces)
     }
     let children = of.children.compactMap{$0}
+
+
     if children.contains(where: {$0 is SwitchDefaultLabelSyntax}) {
       return "~~~" // to keep default case always at the bottom
     }
@@ -115,6 +113,7 @@ extension SwitchStmtSyntax: AlphaSortable {
       .flatMap{$0.caseItems.alphaSorted}
       .compactMap{$0.pattern}
       .first
+
 
     var output: String
 
@@ -153,6 +152,7 @@ extension SwitchStmtSyntax: AlphaSortable {
   }
 
   var alphaSorted: SwitchStmtSyntax {
+    guard !cases.description.contains(".success"), !cases.description.contains(".failure") else {return self} // not to sort Result cases
     let switchCaseListSyntax = cases
       .sorted{
         getCaseID($1).caseInsensitiveCompare(getCaseID($0)) == .orderedDescending

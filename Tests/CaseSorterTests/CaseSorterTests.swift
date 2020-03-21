@@ -15,6 +15,136 @@ final class CaseSorterTests: XCTestCase {
     super.tearDown()
   }
 
+  func testOptionalResultType() throws {
+
+    let input =
+    """
+      switch result {
+          case let .success(result):
+            ()
+          case let .failure(error):
+            ()
+        }
+      """
+
+    let expected =
+    """
+      switch result {
+          case let .success(result):
+            ()
+          case let .failure(error):
+            ()
+        }
+      """
+
+    let actual = try caseSorter.saveAsFileTemporarily(input: input)
+
+    XCTAssertEqual(actual.description, expected)
+  }
+//
+//  var result: Result<PaginatedResult<AnySearch<Message>.SearchResult>, WebError>? {
+//    didSet {
+//      switch result {
+//      case let .success(result)? where result.items.isEmpty:
+//        viewState = .empty
+//        nextOffset = 0
+//      case let .success(result)?:
+//        viewState = .results(result)
+//        nextOffset = result.offset
+//      case let .failure(error)?:
+//        viewState = .error(error)
+//        nextOffset = 0
+//      case .none:
+//        viewState = .initial
+//        nextOffset = 0
+//      }
+//    }
+//  }
+  func testMultipleNested() throws {
+
+    let input =
+    """
+      public enum InitialState {
+        case loggingIn
+        case switchingCards
+        case selectingCard
+        case refreshingAccountSummary
+
+        var state: State {
+          switch self {
+          case .loggingIn, .switchingCards, .selectingCard:
+            return .expanded(nil)
+          case .refreshingAccountSummary:
+            return .stacked(nil)
+          }
+        }
+
+        var mode: Mode {
+          switch self {
+          case .loggingIn, .switchingCards, .selectingCard:
+            return .expanded
+          case .refreshingAccountSummary:
+            return .stacked
+          }
+        }
+
+        var collapseMode: CollapseMode {
+          switch self {
+          case .switchingCards, .refreshingAccountSummary:
+            return .auto(delay: nil)
+          case .selectingCard:
+            return .manual
+          case .loggingIn:
+            return .auto(delay: 1.0)
+          }
+        }
+      }
+      """
+
+    let expected =
+    """
+      public enum InitialState {
+        case loggingIn
+        case refreshingAccountSummary
+        case selectingCard
+        case switchingCards
+
+        var state: State {
+          switch self {
+          case .loggingIn, .selectingCard, .switchingCards:
+            return .expanded(nil)
+          case .refreshingAccountSummary:
+            return .stacked(nil)
+          }
+        }
+
+        var mode: Mode {
+          switch self {
+          case .loggingIn, .selectingCard, .switchingCards:
+            return .expanded
+          case .refreshingAccountSummary:
+            return .stacked
+          }
+        }
+
+        var collapseMode: CollapseMode {
+          switch self {
+          case .loggingIn:
+            return .auto(delay: 1.0)
+          case .selectingCard:
+            return .manual
+          case .refreshingAccountSummary, .switchingCards:
+            return .auto(delay: nil)
+          }
+        }
+      }
+      """
+
+    let actual = try caseSorter.saveAsFileTemporarily(input: input)
+
+    XCTAssertEqual(actual.description, expected)
+  }
+
   func testSwitchSyntax_withTuple2() throws {
     let input = """
                  enum erk{
@@ -561,6 +691,7 @@ final class CaseSorterTests: XCTestCase {
   }
 
 
+  @available(OSX 10.12, *)
   func visitor(input: String) -> Syntax {
     let file = FileManager.default.temporaryDirectory.appendingPathComponent("deneme")
     try! input.write(to: file, atomically: true, encoding: .utf8)
@@ -621,57 +752,3 @@ enum MyTest1{
 //}
 
 
-//public enum InitialState {
-//   case loggingIn
-//   case switchingCards
-//   case selectingCard
-//   case refreshingAccountSummary
-//
-//   var state: State {
-//     switch self {
-//     case .loggingIn, .switchingCards, .selectingCard:
-//       return .expanded(nil)
-//     case .refreshingAccountSummary:
-//       return .stacked(nil)
-//     }
-//   }
-//
-//   var mode: Mode {
-//     switch self {
-//     case .loggingIn, .switchingCards, .selectingCard:
-//       return .expanded
-//     case .refreshingAccountSummary:
-//       return .stacked
-//     }
-//   }
-//
-//   var collapseMode: CollapseMode {
-//     switch self {
-//     case .switchingCards, .refreshingAccountSummary:
-//       return .auto(delay: nil)
-//     case .selectingCard:
-//       return .manual
-//     case .loggingIn:
-//       return .auto(delay: 1.0)
-//     }
-//   }
-// }
-
-//var result: Result<PaginatedResult<AnySearch<Message>.SearchResult>, WebError>? {
-//  didSet {
-//    switch result {
-//    case let .success(result)? where result.items.isEmpty:
-//      viewState = .empty
-//      nextOffset = 0
-//    case let .success(result)?:
-//      viewState = .results(result)
-//      nextOffset = result.offset
-//    case let .failure(error)?:
-//      viewState = .error(error)
-//      nextOffset = 0
-//    case .none:
-//      viewState = .initial
-//      nextOffset = 0
-//    }
-//  }
-//}
