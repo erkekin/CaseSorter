@@ -15,6 +15,34 @@ final class CaseSorterTests: XCTestCase {
     super.tearDown()
   }
 
+
+  func testLet() throws {
+
+    let input =
+    """
+      switch result {
+          case let .b(result):
+            ()
+          case .a:
+            ()
+        }
+      """
+
+    let expected =
+    """
+      switch result {
+          case .a:
+            ()
+          case let .b(result):
+            ()
+        }
+      """
+
+    let actual = try caseSorter.saveAsFileTemporarily(input: input)
+
+    XCTAssertEqual(actual.description, expected)
+  }
+
   func testOptionalResultType() throws {
 
     let input =
@@ -131,10 +159,10 @@ final class CaseSorterTests: XCTestCase {
           switch self {
           case .loggingIn:
             return .auto(delay: 1.0)
-          case .selectingCard:
-            return .manual
           case .refreshingAccountSummary, .switchingCards:
             return .auto(delay: nil)
+          case .selectingCard:
+            return .manual
           }
         }
       }
@@ -282,10 +310,10 @@ final class CaseSorterTests: XCTestCase {
          switch self {
          case .loggingIn:
            return .auto(delay: 1.0)
-         case .selectingCard:
-           return .manual
          case .refreshingAccountSummary, .switchingCards:
            return .auto(delay: nil)
+         case .selectingCard:
+           return .manual
          }
        }
      }
@@ -453,14 +481,14 @@ final class CaseSorterTests: XCTestCase {
                           return array.map { $0.serialize() }
                         case let .bool(bool):
                           return NSNumber(value: bool)
-                        case .null:
-                          return NSNull()
                         case let .dict(dict):
                           var serializedDict = [String: Any]()
                           for (key, value) in dict {
                             serializedDict[key] = value.serialize()
                           }
                           return serializedDict
+                        case .null:
+                          return NSNull()
                         case let .number(number):
                           return number
                         case let .string(string):

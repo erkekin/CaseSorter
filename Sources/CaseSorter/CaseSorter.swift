@@ -114,7 +114,6 @@ extension SwitchStmtSyntax: AlphaSortable {
       .compactMap{$0.pattern}
       .first
 
-
     var output: String
 
     switch pattern {
@@ -128,19 +127,31 @@ extension SwitchStmtSyntax: AlphaSortable {
         .compactMap{$0.name}
         .first
       output = a?.description ?? "NOT"
+
     case is ExpressionPatternSyntax:
-      let a = pattern?
+      let x = pattern?
         .children
-        .compactMap{$0 as? TupleExprSyntax}
+
+      let firstMember = x?.compactMap{$0 as? MemberAccessExprSyntax}.compactMap{$0.name}.compactMap{$0.text}.first
+      
+      if  let firstMember = firstMember {
+        output = firstMember
+        return output.trimmingCharacters(in: .whitespacesAndNewlines)
+      }
+
+      let a = x?.compactMap{$0 as? TupleExprSyntax}
         .flatMap{$0.elementList}
         .compactMap{$0.expression}
         .first
+
       switch a {
       case is DiscardAssignmentExprSyntax:
         output = (a as! DiscardAssignmentExprSyntax).description
+
       case is MemberAccessExprSyntax:
         let b = (a as! MemberAccessExprSyntax).name
         output = b.text
+
       default:
         output = syntax.description
       }
@@ -185,8 +196,8 @@ extension EnumDeclSyntax {
       .filter{$0.decl is EnumCaseDeclSyntax}
 
     let otherDecls = members
-         .members
-         .filter{!($0.decl is EnumCaseDeclSyntax)}
+      .members
+      .filter{!($0.decl is EnumCaseDeclSyntax)}
 
     let sortedEnumCaseDecls = enumCaseDecls
       .sorted{
