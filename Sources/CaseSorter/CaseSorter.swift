@@ -77,7 +77,7 @@ extension CaseItemListSyntax: AlphaSortable {
 
 extension EnumCaseElementListSyntax: AlphaSortable {
   var alphaSorted: EnumCaseElementListSyntax {
-
+    guard !description.contains(" = ") else {return self}
     let a = (children
       .sorted{
         $1.description

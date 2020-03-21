@@ -4,7 +4,7 @@ A SPM tool to sort `enum` and `switch` cases. This Swift project automatically c
 
 ## Usage
 
-Just select a bunch of text in Xcode and right click > Services > `Sort cases` 🎊
+Just select a bunch of text in Xcode and right click > Services > `Sortcases`  🎊
 
 or with CLI arguments (support mutliple swift files)
 ```
@@ -98,9 +98,6 @@ jobs:
         branch-suffix: none
 
 ```
-
-## Limitations
-* Shouldn't sort Result<T, Error> cases, contributions welcome.
 
 Please see tests.
 

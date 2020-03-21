@@ -43,7 +43,27 @@ final class CaseSorterTests: XCTestCase {
     XCTAssertEqual(actual.description, expected)
   }
 
-  func testOptionalResultType() throws {
+  func testResultType_shouldntChange1() throws {
+
+     let input =
+     """
+        enum MessageType: Int {
+          case success = 0, failure
+       }
+       """
+
+     let expected =
+     """
+        enum MessageType: Int {
+          case success = 0, failure
+       }
+       """
+
+     let actual = try caseSorter.saveAsFileTemporarily(input: input)
+
+     XCTAssertEqual(actual.description, expected)
+   }
+  func testResultType_shouldntChange() throws {
 
     let input =
     """
@@ -69,25 +89,58 @@ final class CaseSorterTests: XCTestCase {
 
     XCTAssertEqual(actual.description, expected)
   }
-//
-//  var result: Result<PaginatedResult<AnySearch<Message>.SearchResult>, WebError>? {
-//    didSet {
-//      switch result {
-//      case let .success(result)? where result.items.isEmpty:
-//        viewState = .empty
-//        nextOffset = 0
-//      case let .success(result)?:
-//        viewState = .results(result)
-//        nextOffset = result.offset
-//      case let .failure(error)?:
-//        viewState = .error(error)
-//        nextOffset = 0
-//      case .none:
-//        viewState = .initial
-//        nextOffset = 0
-//      }
-//    }
-//  }
+
+  func testOptionalResultType_shouldntChange() throws {
+
+    let input =
+    """
+      var result: Result<PaginatedResult<AnySearch<Message>.SearchResult>, WebError>? {
+        didSet {
+          switch result {
+          case let .success(result)? where result.items.isEmpty:
+            viewState = .empty
+            nextOffset = 0
+          case let .success(result)?:
+            viewState = .results(result)
+            nextOffset = result.offset
+          case let .failure(error)?:
+            viewState = .error(error)
+            nextOffset = 0
+          case .none:
+            viewState = .initial
+            nextOffset = 0
+          }
+        }
+      }
+      """
+
+    let expected =
+    """
+      var result: Result<PaginatedResult<AnySearch<Message>.SearchResult>, WebError>? {
+        didSet {
+          switch result {
+          case let .success(result)? where result.items.isEmpty:
+            viewState = .empty
+            nextOffset = 0
+          case let .success(result)?:
+            viewState = .results(result)
+            nextOffset = result.offset
+          case let .failure(error)?:
+            viewState = .error(error)
+            nextOffset = 0
+          case .none:
+            viewState = .initial
+            nextOffset = 0
+          }
+        }
+      }
+      """
+
+    let actual = try caseSorter.saveAsFileTemporarily(input: input)
+
+    XCTAssertEqual(actual.description, expected)
+  }
+
   func testMultipleNested() throws {
 
     let input =
@@ -718,6 +771,86 @@ final class CaseSorterTests: XCTestCase {
     XCTAssertEqual(actual.description, expected)
   }
 
+  func testEnumShouldntChange() throws {
+
+     let input =
+     """
+       enum Event {
+         case animationStarted(State, UIViewPropertyAnimator)
+         case autoExpandingFinished
+         case autoExpandingStarted(UIViewPropertyAnimator)
+         case cardTapped
+         case expandedCardSwitcherClosed
+         case scrolled(Scroll)
+         case scrollingStopped(Scroll)
+         case stackedCardsTapped
+         case stackingFinished
+         case stackingStarted(UIViewPropertyAnimator)
+         case viewWillAppear
+         case viewWillDisappear
+
+         struct Scroll {
+           let offset: CGFloat
+           let viewHeight: CGFloat
+
+           func uncollapseProgress() -> CGFloat {
+             return (-offset / (stackedHeight - collapsedHeight)) + 1
+           }
+
+           func collapseProgress() -> CGFloat {
+             return offset / (stackedHeight - collapsedHeight)
+           }
+
+           func expandProgress() -> CGFloat {
+             let expandHeight = viewHeight - stackedHeight
+             return -offset / expandHeight
+           }
+         }
+       }
+       """
+
+     let expected =
+     """
+       enum Event {
+         case animationStarted(State, UIViewPropertyAnimator)
+         case autoExpandingFinished
+         case autoExpandingStarted(UIViewPropertyAnimator)
+         case cardTapped
+         case expandedCardSwitcherClosed
+         case scrolled(Scroll)
+         case scrollingStopped(Scroll)
+         case stackedCardsTapped
+         case stackingFinished
+         case stackingStarted(UIViewPropertyAnimator)
+         case viewWillAppear
+         case viewWillDisappear
+
+         struct Scroll {
+           let offset: CGFloat
+           let viewHeight: CGFloat
+
+           func uncollapseProgress() -> CGFloat {
+             return (-offset / (stackedHeight - collapsedHeight)) + 1
+           }
+
+           func collapseProgress() -> CGFloat {
+             return offset / (stackedHeight - collapsedHeight)
+           }
+
+           func expandProgress() -> CGFloat {
+             let expandHeight = viewHeight - stackedHeight
+             return -offset / expandHeight
+           }
+         }
+       }
+       """
+
+     let actual = try caseSorter.saveAsFileTemporarily(input: input)
+
+     XCTAssertEqual(actual.description, expected)
+   }
+
+
 
   @available(OSX 10.12, *)
   func visitor(input: String) -> Syntax {
@@ -741,42 +874,3 @@ enum MyTest1{
   case cfdgdf
   case ddfgdf
 }
-//enum MessageType: Int {
-//  case success = 0, failure
-//}
-
-//
-//enum Event {
-//  case animationStarted(State, UIViewPropertyAnimator)
-//  case autoExpandingFinished
-//  case autoExpandingStarted(UIViewPropertyAnimator)
-//  case cardTapped
-//  case expandedCardSwitcherClosed
-//  case scrolled(Scroll)
-//  case scrollingStopped(Scroll)
-//  case stackedCardsTapped
-//  case stackingFinished
-//  case stackingStarted(UIViewPropertyAnimator)
-//  case viewWillAppear
-//  case viewWillDisappear
-//
-//  struct Scroll {
-//    let offset: CGFloat
-//    let viewHeight: CGFloat
-//
-//    func uncollapseProgress() -> CGFloat {
-//      return (-offset / (stackedHeight - collapsedHeight)) + 1
-//    }
-//
-//    func collapseProgress() -> CGFloat {
-//      return offset / (stackedHeight - collapsedHeight)
-//    }
-//
-//    func expandProgress() -> CGFloat {
-//      let expandHeight = viewHeight - stackedHeight
-//      return -offset / expandHeight
-//    }
-//  }
-//}
-
-
