@@ -2,7 +2,6 @@ import XCTest
 @testable import CaseSorter
 import SwiftSyntax
 
-@available(OSX 10.12, *)
 final class CaseSorterTests: XCTestCase {
   private var caseSorter: CaseSorter!
 

@@ -15,7 +15,7 @@ func writeTo(path: String) throws {
   }
 }
 
-if CommandLine.arguments.count > 0 {
+if CommandLine.arguments.count > 1 {
   try Set(
     CommandLine.arguments
       .filter{URL(fileURLWithPath: $0).pathExtension == "swift"}
